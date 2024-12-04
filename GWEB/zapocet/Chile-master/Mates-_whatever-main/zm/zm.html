@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="js_zm/mapa/leaflet/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div>
+        <!-- aria-controls="collapsibleNavId" -->
+        <!-- Navigace -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
+            <a class="navbar-brand " href="../index.html"><img src="../images/flag-of-chile.gif" class="navbarlogo"
+                    alt="Logo" style="width:75px;height:50px;"></a>
+            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation" aria-controls="collapsibleNavId">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active ">
+                        <a class="nav-link" href="../index.html">Hlavní stránka <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <!---->
+                    <div class="collapse navbar-collapse" id="collapsibleNavId">
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="../history/history.html">historie <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">zajímavá mista <span
+                                                class="sr-only">(current)</span></a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </ul>
+
+        </nav>
+    </div>
+
+    <div class="container bg-danger" id="Mapa-nadpis">
+        <h1>Zajímavá místa</h1>
+
+    </div>
+
+
+    <div class="container">
+        <div id="mapa"></div>
+    </div>
+    <br>
+    <div class="container">
+        <button>
+            <a href="nove.html">Nový bod</a>
+        </button>
+    </div>
+<br>
+    <script src="js_zm/mapa/leaflet/leaflet.js"></script>
+    <script src="js_zm/zm.js"></script>
+
+    <footer class="container-fluid p-5">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>Autor: Matěj Říman</p>
+            </div>
+            <div class="col-sm-6">
+                <p>Zdroj informací</p>
+                <p><a href="https://cs.wikipedia.org/wiki/Chile">wikipedie</a></p>
+            </div>
+        </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

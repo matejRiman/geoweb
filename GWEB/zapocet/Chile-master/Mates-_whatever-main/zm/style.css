@@ -1,0 +1,30 @@
+
+h2{
+    background-color: red;
+    font-size: 2em;
+}
+h3{
+    color: red;
+    font-size: 1.5em;
+}
+h4{
+    color: blue;
+    font-size: 1.3em;
+}
+
+#Mapa-nadpis{
+    color: black;
+}
+
+
+#mapa {
+    height: 700px;
+    width: 100%;
+}
+
+
+
+footer{
+    background-color: blue;
+    color: white;
+}

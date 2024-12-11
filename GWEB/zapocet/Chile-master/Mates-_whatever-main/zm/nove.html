@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Mapa s lokální databází</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,88 +10,74 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--Font Awesome-->
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="js_zm/mapa/leaflet/leaflet.css">
     <link rel="stylesheet" href="style.css">
 
+    <style>
+        #mapa {
+            height: 500px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
     <div>
-        <!-- aria-controls="collapsibleNavId" -->
         <!-- Navigace -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
-            <a class="navbar-brand " href="../index.html"><img src="../images/flag-of-chile.gif" class="navbarlogo"
-                    alt="Logo" style="width:75px;height:50px;"></a>
-            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/flag-of-chile.gif" class="navbarlogo" alt="Logo" style="width:75px;height:50px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
                 aria-expanded="false" aria-label="Toggle navigation" aria-controls="collapsibleNavId">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active ">
-                        <a class="nav-link" href="../index.html">Hlavní stránka <span
-                                class="sr-only">(current)</span></a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../index.html">Hlavní stránka <span class="sr-only">(current)</span></a>
                     </li>
-                    <!---->
-                    <div class="collapse navbar-collapse" id="collapsibleNavId">
-                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="../history/history.html">historie <span
-                                        class="sr-only">(current)</span></a>
-                            </li>
-                            <div class="collapse navbar-collapse" id="collapsibleNavId">
-                                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">zajímavá mista <span
-                                                class="sr-only">(current)</span></a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-                        </ul>
-
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../history/history.html">Historie <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Zajímavá místa <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </div>
 
-
-
-
-
     <div class="container">
-        <h2>Nový bod</h2>
+        <h2>Mapa s lokální databází</h2>
+        <div id="mapa"></div>
+
+        <h3>Nový bod</h3>
         <form id="data-form">
             <div class="form-group">
                 <label for="name">Název bodu</label>
-                <input type="text" class="form-control" id="name" required>
+                <input type="text" class="form-control" id="name" placeholder="Název" required>
             </div>
             <div class="form-group">
                 <label for="latitude">Šířka</label>
-                <input type="number" id="latitude" step="any" placeholder="Latitude">
+                <input type="number" class="form-control" id="latitude" step="any" placeholder="Např. 50.0755" required>
             </div>
             <div class="form-group">
                 <label for="longitude">Délka</label>
-                <input type="number" id="longitude" step="any" placeholder="Longitude">
+                <input type="number" class="form-control" id="longitude" step="any" placeholder="Např. 14.4378" required>
             </div>
             <div class="form-group">
                 <label for="description">Popis</label>
-                <textarea class="form-control" id="description" rows="3" required></textarea>
+                <textarea class="form-control" id="description" rows="3" placeholder="Popis bodu" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Přidat bod</button>
         </form>
     </div>
-
-
-
-
-
-
-    <script src="js_zm/mapa/leaflet/leaflet.js"></script>
-    <script src="js_zm/zm.js"></script>
-
 
     <footer class="container-fluid p-5">
         <div class="row">
@@ -100,12 +86,17 @@
             </div>
             <div class="col-sm-6">
                 <p>Zdroj informací</p>
-                <p><a href="https://cs.wikipedia.org/wiki/Chile">wikipedie</a></p>
+                <p><a href="https://cs.wikipedia.org/wiki/Chile">Wikipedia</a></p>
             </div>
         </div>
     </footer>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <!-- Leaflet JS -->
+    <script src="js_zm/mapa/leaflet/leaflet.js"></script>
+    <!-- Lokální JS -->
+    <script src="js_zm/zm.js"></script>
+
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

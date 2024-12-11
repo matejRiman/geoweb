@@ -1,59 +1,66 @@
-const FEATURE_LAYER_URL = 'https://services5.arcgis.com/UbiPR9eAyIWvC8EM/arcgis/rest/services/Layer_seminarka/FeatureServer';
-const TOKEN = 'VÁŠ_TOKEN';
-
+// Inicializace mapy
 var mapa = L.map('mapa').setView([-34.773704303745575, -71.54169943220856], 4);
 
-// OPS
+// Přidání OpenStreetMap vrstvy
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
     maxZoom: 19
 }).addTo(mapa);
 
-async function loadFeatures() {
-    const response = await fetch(`${FEATURE_LAYER_URL}/query?where=1=1&outFields=*&f=json&token=${TOKEN}`);
-    const data = await response.json();
+// Funkce pro získání bodů z lokální databáze
+function getLocalPoints() {
+    const points = localStorage.getItem('mapPoints');
+    return points ? JSON.parse(points) : [];
+}
 
-    data.features.forEach(feature => {
-        const { name, description } = feature.attributes;
-        const { x: longitude, y: latitude } = feature.geometry;
+// Funkce pro uložení bodů do lokální databáze
+function saveLocalPoints(points) {
+    localStorage.setItem('mapPoints', JSON.stringify(points));
+}
 
+// Funkce pro načtení bodů a jejich zobrazení na mapě
+function loadFeatures() {
+    const points = getLocalPoints();
+
+    points.forEach(({ name, latitude, longitude, description }) => {
         L.marker([latitude, longitude])
             .bindPopup(`<b>${name}</b><br>${description}`)
             .addTo(mapa);
     });
 }
 
-async function addFeature(name, latitude, longitude, description) {
-    const payload = {
-        features: [{ geometry: { x: longitude, y: latitude }, attributes: { name, description } }],
-        f: 'json',
-        token: TOKEN,
-    };
+// Funkce pro přidání bodu do mapy i databáze
+function addFeature(name, latitude, longitude, description) {
+    const points = getLocalPoints();
+    const newPoint = { name, latitude, longitude, description };
+    points.push(newPoint);
 
-    const response = await fetch(`${FEATURE_LAYER_URL}/addFeatures`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-    });
+    saveLocalPoints(points); // Ulož do databáze
 
-    const result = await response.json();
-    if (result.addResults[0]?.success) {
-        alert('Bod přidán!');
-        loadFeatures(); // Znovu načte body
-    } else {
-        console.error('Chyba při přidání bodu:', result);
-    }
+    // Přidání markeru na mapu
+    L.marker([latitude, longitude])
+        .bindPopup(`<b>${name}</b><br>${description}`)
+        .addTo(mapa);
+
+    alert('Bod přidán!');
 }
 
-document.getElementById('data-form').addEventListener('submit', async function (event) {
+// Obsluha formuláře
+document.getElementById('data-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const name = document.getElementById('name').value.trim();
-    const latitude = parseFloat(document.getElementById('latitude').value.trim());
-    const longitude = parseFloat(document.getElementById('longitude').value.trim());
+    const latitude = parseFloat(document.getElementById('latitude').value.replace(',', '.'));
+    const longitude = parseFloat(document.getElementById('longitude').value.replace(',', '.'));
     const description = document.getElementById('description').value.trim();
 
-    await addFeature(name, latitude, longitude, description);
+    if (!name || isNaN(latitude) || isNaN(longitude)) {
+        alert('Zkontrolujte, že jste správně zadali všechny údaje.');
+        return;
+    }
+
+    addFeature(name, latitude, longitude, description);
 });
 
-loadFeatures(); // Načte body při startu
+// Načti body při startu
+loadFeatures();
